@@ -10,6 +10,7 @@ public class Player : Entity
         Name = "You";
         Health = 20;
         Damage = 5;
+        Protect = 0;
         Coins = 0;
         Upgrade = new PlayerUpgrade();
     }
@@ -28,6 +29,8 @@ public class Player : Entity
     public void PlayerReset()
     {
         Health = 20 + Upgrade.MaxHealthBoost;
+        Damage = 5 + Upgrade.DamageBoost;
+        Protect = Upgrade.ArmorBoost;
     }
 
     public void AddCoins(int amount)

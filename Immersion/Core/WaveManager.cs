@@ -34,11 +34,16 @@ public class WaveManager
             
             _combat.Fight(_player, enemy, ui);
             
-            int coins = enemy.GetBaseCoins() + (_enemyNumber / 10);
-            _player.AddCoins(coins);
+            int baseCoins = enemy.GetBaseCoins() * (1 + (_enemyNumber / 10));
+            int totalCoins = baseCoins * _player.Upgrade.CoinsBoost;
+            _player.AddCoins(totalCoins);
             
             if (_enemyNumber % 10 == 0 && !_player.IsDead)
             {
+                int healAmount = _player.Upgrade.HealBoost;
+                _player.Heal(healAmount);
+                Console.WriteLine($"\nAfter surviving 10 enemies, you healed for {healAmount} HP!");
+                
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("\nYou feel yourself sinking deeper into the abyss...");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -51,7 +56,7 @@ public class WaveManager
     {
         if (_enemyNumber % 10 == 0 && !_player.IsDead)
         {
-            int healAmount = _player.Upgrade.HealPower;
+            int healAmount = _player.Upgrade.HealBoost;
             _player.Heal(healAmount);
 
             Console.WriteLine($"\nAfter surviving 10 enemies, you healed for {healAmount} HP!");

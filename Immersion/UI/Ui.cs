@@ -8,7 +8,7 @@ public class Ui
         Console.ForegroundColor = ConsoleColor.DarkRed;
         Console.WriteLine("===== Immersion =====");
         Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("\nSelect an action:");
+        Console.WriteLine("Select an action:");
         Console.WriteLine("1. Start\n2. Improvements\n3. Bestiary\n0. Exit\n");
         Console.Write("-> ");
     }
@@ -29,11 +29,14 @@ public class Ui
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("===== Improvements =====\n");
+            Console.WriteLine("===== Improvements =====");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"Coins: {player.Coins}");
-            Console.WriteLine($"1. Increase Max Health (+5)  | Current Boost: {player.Upgrade.MaxHealthBoost}");
-            Console.WriteLine($"2. Increase Damage (+1)      | Current Boost: {player.Upgrade.DamageBoost}");
-            Console.WriteLine($"3. Increase Heal Power (+1)  | Current Heal: {player.Upgrade.HealPower}");
+            Console.WriteLine($"1. Increase Max Health (+5)  | Cost: {player.Upgrade.HealthCost} | Current Boost: {player.Upgrade.MaxHealthBoost}");
+            Console.WriteLine($"2. Increase Damage (+1)      | Cost: {player.Upgrade.DamageCost} | Current Boost: {player.Upgrade.DamageBoost}");
+            Console.WriteLine($"3. Increase Heal Power (+1)  | Cost: {player.Upgrade.HealCost}  | Current Heal: {player.Upgrade.HealBoost}");
+            Console.WriteLine($"4. Increase Armor (+5)       | Cost: {player.Upgrade.ArmorCost}  | Current Armor: {player.Upgrade.ArmorBoost}");
+            Console.WriteLine($"5. Increase Coin Multiplier  | Cost: {player.Upgrade.CoinsCost} | Current x{player.Upgrade.CoinsBoost}");
             Console.WriteLine("0. Back to menu\n");
             Console.Write("-> ");
 
@@ -41,34 +44,53 @@ public class Ui
             switch (input)
             {
                 case "1":
-                    if (player.SpendCoins(10))
+                    if (player.SpendCoins(player.Upgrade.HealthCost))
                     {
                         player.Upgrade.IncreaseHealth(5);
                         Console.WriteLine("Max health increased!");
                     }
                     else
                         Console.WriteLine("Not enough coins!");
-
                     break;
                 case "2":
-                    if (player.SpendCoins(5))
+                    if (player.SpendCoins(player.Upgrade.DamageCost))
                     {
                         player.Upgrade.IncreaseDamage(1);
                         Console.WriteLine("Damage increased!");
                     }
                     else
                         Console.WriteLine("Not enough coins!");
-
                     break;
                 case "3":
-                    if (player.SpendCoins(5))
+                    if (player.SpendCoins(player.Upgrade.HealCost))
                     {
                         player.Upgrade.IncreaseHealPower(1);
                         Console.WriteLine("Heal power increased!");
                     }
                     else
                         Console.WriteLine("Not enough coins!");
-
+                    break;
+                case "4":
+                    if (player.Upgrade.ArmorBoost >= 75)
+                        Console.WriteLine("Armor is already at maximum!");
+                    else if (player.SpendCoins(player.Upgrade.ArmorCost))
+                    {
+                        player.Upgrade.IncreaseArmor(5);
+                        Console.WriteLine("Armor increased!");
+                    }
+                    else
+                        Console.WriteLine("Not enough coins!");
+                    break;
+                case "5":
+                    if (player.Upgrade.CoinsBoost >= 5)
+                        Console.WriteLine("Coins multiplier is already at maximum!");
+                    else if (player.SpendCoins(player.Upgrade.CoinsCost))
+                    {
+                        player.Upgrade.IncreaseCoins();
+                        Console.WriteLine($"Coins multiplier increased! Current x{player.Upgrade.CoinsBoost}");
+                    }
+                    else
+                        Console.WriteLine("Not enough coins!");
                     break;
                 case "0":
                     return;
@@ -150,6 +172,7 @@ public class Ui
         Console.WriteLine("║      Maybe next time?      ║");
         Console.WriteLine("╚════════════════════════════╝");
         Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("\nPress any key to exit to the menu...");
         Console.ReadKey();
     }
     

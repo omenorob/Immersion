@@ -4,9 +4,52 @@ public class PlayerUpgrade
 {
     public int MaxHealthBoost { get; private set; } = 0;
     public int  DamageBoost { get; private set; } = 0;
-    public int HealPower { get; private set; } = 5;
+    public int HealBoost { get; private set; } = 5;
+    public int ArmorBoost { get; private set; } = 0;
+    public int CoinsBoost { get; private set; } = 1;
     
-    public void IncreaseHealth(int amount) => MaxHealthBoost += amount;
-    public void IncreaseDamage(int amount) => DamageBoost += amount;
-    public void IncreaseHealPower(int amount) => HealPower += amount;
+    public int HealthCost { get; set; } = 10;
+    public int DamageCost { get; set; } = 5;
+    public int HealCost { get; set; } = 5;
+    public int ArmorCost { get; set; } = 5;
+    public int CoinsCost { get; set; } = 20;
+    
+    private const int MaxArmor = 75;
+    private const int MaxCoinsBoost = 10;
+
+    public void IncreaseHealth(int amount)
+    {
+        MaxHealthBoost += amount;
+        HealthCost *= 2;
+    }
+
+    public void IncreaseDamage(int amount)
+    {
+        DamageBoost += amount;
+        DamageCost *= 2;
+    }
+
+    public void IncreaseHealPower(int amount)
+    {
+        HealBoost += amount;
+        HealCost *= 2;
+    }
+
+    public void IncreaseArmor(int amount)
+    {
+        if (ArmorBoost >= MaxArmor)
+            return;
+        ArmorBoost += amount;
+        if (ArmorBoost > MaxArmor)
+            ArmorBoost = MaxArmor;
+        ArmorCost *= 2;
+    }
+
+    public void IncreaseCoins()
+    {
+        if (CoinsBoost >= MaxCoinsBoost)
+            return;
+        CoinsBoost++;
+        CoinsCost *= 2;
+    }
 }

@@ -6,6 +6,7 @@ public class Entity
     public int Health { get; set; }
     public int Damage { get; set; }
     public int Protect { get; set; }
+    public int Coins { get; set; }
     
     public bool IsDead => Health <= 0;
 
