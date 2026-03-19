@@ -4,17 +4,17 @@ public class CombatSystem
 {
     private const int TurnDelay = 250;
     
-    public void Fight(Player player, Entity entity, UI ui)
+    public void Fight(Player player, Entity entity, Ui ui)
     {
         Console.Clear();
         
         while (!player.IsDead && !entity.IsDead)
         {
             entity.TakeDamage(player.Damage);
-            ui.ShowPlayerAttackUI(player, entity);
+            ui.ShowPlayerAttackUi(player, entity);
             if (!entity.IsDead)
             {
-                ui.ShowEnemyHealthUI(entity);
+                ui.ShowEnemyHealthUi(entity);
             }
             if (entity.IsDead)
             {
@@ -26,10 +26,10 @@ public class CombatSystem
             Thread.Sleep(TurnDelay);
             
             player.TakeDamage(entity.Damage);
-            ui.ShowEnemyAttackUI(entity);
+            ui.ShowEnemyAttackUi(entity);
             if (!player.IsDead)
             {
-                ui.ShowPlayerHealthUI(player);
+                ui.ShowPlayerHealthUi(player);
             }
             if (player.IsDead)
             {
@@ -42,7 +42,7 @@ public class CombatSystem
         }
     }
 
-    private void CheckDeath(Entity entity, UI ui)
+    private void CheckDeath(Entity entity, Ui ui)
     {
         if (!entity.IsDead)
             return;

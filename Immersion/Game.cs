@@ -3,28 +3,28 @@
 public class Game
 {
     private int _userInput;
-    private UI _ui =  new UI();
+    private Ui _ui =  new Ui();
     private CombatSystem _combat = new CombatSystem();
 
     public void Start()
     {
         while (true)
         {
-            _ui.ShowMenuUI();
+            _ui.ShowMenuUi();
             
             while (true)
             {
-                _ui.ShowMenuUI();
+                _ui.ShowMenuUi();
                 
                 if (!int.TryParse(Console.ReadLine(), out _userInput))
                 {
-                    _ui.InvalidInputUI();
+                    _ui.InvalidInputUi();
                     continue;
                 }
 
                 if (_userInput < 0 || _userInput > 3)
                 {
-                    _ui.InvalidInputUI();
+                    _ui.InvalidInputUi();
                     continue;
                 }
 
@@ -37,7 +37,7 @@ public class Game
             }
             else if (_userInput == 0)
             {
-                _ui.ShowExitUI();
+                _ui.ShowExitUi();
                 break;
             }
         }

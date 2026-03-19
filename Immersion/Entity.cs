@@ -2,10 +2,10 @@
 
 public class Entity
 {
-    public string Name { get; protected set; }
-    public int Health { get; protected set; }
-    public int Damage { get; protected set; }
-    public int Protect { get; protected set; }
+    public string Name { get; set; }
+    public int Health { get; set; }
+    public int Damage { get; set; }
+    public int Protect { get; set; }
     
     public bool IsDead => Health <= 0;
 
@@ -15,8 +15,8 @@ public class Entity
         Health -= finalDamage;
     }
     
-    public virtual void OnDeath(UI ui)
+    public virtual void OnDeath(Ui ui)
     {
-        ui.ShowEnemyDeathUI(this);
+        ui.ShowEnemyDeathUi(this);
     }
 }

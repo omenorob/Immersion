@@ -16,8 +16,8 @@ public class Player : Entity
         Health += HealPower;
     }
     
-    public override void OnDeath(UI ui)
+    public override void OnDeath(Ui ui)
     {
-        ui.ShowPlayerDeathUI();
+        ui.ShowPlayerDeathUi();
     }
 }

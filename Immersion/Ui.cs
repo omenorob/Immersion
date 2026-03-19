@@ -1,8 +1,8 @@
 ﻿namespace Immersion;
 
-public class UI
+public class Ui
 {
-    public void ShowMenuUI()
+    public void ShowMenuUi()
     {
         Console.Clear();
         Console.WriteLine("===== Immersion =====");
@@ -11,14 +11,14 @@ public class UI
         Console.Write("-> ");
     }
 
-    public void ShowExitUI()
+    public void ShowExitUi()
     {
         Console.Clear();
         Console.WriteLine("===== Press any key to exit... =====");
         Console.ReadKey();
     }
 
-    public void InvalidInputUI()
+    public void InvalidInputUi()
     {
         Console.Clear();
         Console.WriteLine("===== Invalid input! =====");
@@ -26,7 +26,7 @@ public class UI
         Console.ReadKey();
     }
 
-    public void ShowPlayerDeathUI()
+    public void ShowPlayerDeathUi()
     {
         Console.WriteLine();
         Console.WriteLine("╔════════════════════════════╗");
@@ -36,28 +36,28 @@ public class UI
         Console.ReadKey();
     }
     
-    public void ShowPlayerAttackUI(Player player, Entity entity)
+    public void ShowPlayerAttackUi(Player player, Entity entity)
     {
         Console.WriteLine($"{player.Name} attack {entity.Name} for {player.Damage} damage!");
     }
     
-    public void ShowPlayerHealthUI(Player player)
+    public void ShowPlayerHealthUi(Player player)
     {
         Console.WriteLine($"{player.Name} health: {player.Health}");
     }
 
-    public void ShowEnemyDeathUI(Entity entity)
+    public void ShowEnemyDeathUi(Entity entity)
     {
         Console.WriteLine($"{entity.Name} is dead!");
         Console.ReadKey();
     }
     
-    public void ShowEnemyAttackUI(Entity entity)
+    public void ShowEnemyAttackUi(Entity entity)
     {
         Console.WriteLine($"{entity.Name} attack you for {entity.Damage} damage!");
     }
     
-    public void ShowEnemyHealthUI(Entity entity)
+    public void ShowEnemyHealthUi(Entity entity)
     {
         Console.WriteLine($"{entity.Name} health: {entity.Health}");
     }
