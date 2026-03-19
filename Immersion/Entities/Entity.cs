@@ -19,4 +19,9 @@ public class Entity
     {
         ui.ShowEnemyDeathUi(this);
     }
+    
+    public virtual int GetBaseCoins()
+    {
+        return 1;
+    }
 }

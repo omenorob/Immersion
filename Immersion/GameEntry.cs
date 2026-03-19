@@ -1,6 +1,6 @@
 ﻿namespace Immersion;
 
-class Program
+class GameEntry
 {
     static void Main()
     {

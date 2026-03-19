@@ -8,4 +8,9 @@ public class BloodShark : Entity
         Health = 10;
         Damage = 2;
     }
+    
+    public override int GetBaseCoins()
+    {
+        return 1;
+    }
 }
