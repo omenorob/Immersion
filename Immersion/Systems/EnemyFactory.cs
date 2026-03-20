@@ -27,9 +27,7 @@ public static class EnemyFactory
                 enemy = new TerrifyingBarracuda();
         }
 
-        int boost = (enemyNumber / 10) * 2;
-        enemy.Health += boost;
-        enemy.Damage += boost;
+        EnemyCalculator.ApplyBoost(enemy, enemyNumber);
         
         return enemy;
     }

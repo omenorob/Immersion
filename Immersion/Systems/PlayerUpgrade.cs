@@ -3,9 +3,9 @@
 public class PlayerUpgrade
 {
     public int MaxHealthBoost { get; private set; } = 0;
-    public int  DamageBoost { get; private set; } = 0;
-    public int HealBoost { get; private set; } = 5;
-    public int ArmorBoost { get; private set; } = 0;
+    public int DamageBoost { get; private set; } = 0;
+    public int HealBoost { get; private set; } = 3;
+    public int ProtectBoost { get; private set; } = 0;
     public int CoinsBoost { get; private set; } = 1;
     
     public int HealthCost { get; set; } = 10;
@@ -14,9 +14,6 @@ public class PlayerUpgrade
     public int ArmorCost { get; set; } = 5;
     public int CoinsCost { get; set; } = 20;
     
-    private const int MaxArmor = 75;
-    private const int MaxCoinsBoost = 10;
-
     public void IncreaseHealth(int amount)
     {
         MaxHealthBoost += amount;
@@ -35,19 +32,19 @@ public class PlayerUpgrade
         HealCost *= 2;
     }
 
-    public void IncreaseArmor(int amount)
+    public void IncreaseProtect(int amount)
     {
-        if (ArmorBoost >= MaxArmor)
+        if (ProtectBoost >= GameConstants.MaxProtectBoost)
             return;
-        ArmorBoost += amount;
-        if (ArmorBoost > MaxArmor)
-            ArmorBoost = MaxArmor;
+        ProtectBoost += amount;
+        if (ProtectBoost > GameConstants.MaxProtectBoost)
+            ProtectBoost = GameConstants.MaxProtectBoost;
         ArmorCost *= 2;
     }
 
     public void IncreaseCoins()
     {
-        if (CoinsBoost >= MaxCoinsBoost)
+        if (CoinsBoost >= GameConstants.MaxCoinsBoost)
             return;
         CoinsBoost++;
         CoinsCost *= 2;

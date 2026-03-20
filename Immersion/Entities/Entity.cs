@@ -14,11 +14,9 @@ public class Entity
     {
         int finalDamage = Math.Max(1, damage - Protect);
         Health -= finalDamage;
-    }
-    
-    public virtual void OnDeath(Ui ui)
-    {
-        ui.ShowEnemyDeathUi(this);
+
+        if (Health < 0)
+            Health = 0;
     }
     
     public virtual int GetBaseCoins()

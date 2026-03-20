@@ -2,62 +2,34 @@
 
 public class CombatSystem
 {
-    private const int TurnDelay = 350;
+    private readonly Random _random = new Random();
     
-    public void Fight(Player player, Entity entity, Ui ui)
+    public AttackResult PlayerAttack(Player player, Entity enemy)
     {
-        while (!player.IsDead && !entity.IsDead)
+        bool isCritical = _random.Next(100) < GameConstants.CriticalChancePercent;
+        int damage = isCritical ? player.Damage * 2 : player.Damage;
+        
+        enemy.TakeDamage(damage);
+        
+        return new AttackResult
         {
-            entity.TakeDamage(player.Damage);
-            ui.ShowPlayerAttackUi(player, entity);
-            if (entity.IsDead)
-            {
-                CheckDeath(entity, ui);
-                break;
-            }
-            else
-            {
-                ui.ShowEnemyHealthUi(entity);
-            }
-            
-            Console.WriteLine();
-            Thread.Sleep(TurnDelay);
-            
-            player.TakeDamage(entity.Damage);
-            ui.ShowEnemyAttackUi(entity);
-            if (player.IsDead)
-            {
-                CheckDeath(player, ui);
-                break;
-            }
-            else
-            {
-                ui.ShowPlayerHealthUi(player);
-            }
-            
-            Console.WriteLine();
-            Thread.Sleep(TurnDelay);
-        }
-    }
-
-    private void CheckDeath(Entity entity, Ui ui)
-    {
-        if (!entity.IsDead)
-            return;
-        
-        entity.OnDeath(ui);
+            Damage = damage,
+            IsCritical = isCritical,
+            TargetDead = enemy.IsDead
+        };
     }
     
-    private void CriticalDamage(Entity entity)
+    public AttackResult EnemyAttack(Entity enemy, Player player)
     {
-        Random random = new Random();
+        int damage = enemy.Damage;
         
-        bool isCritical = random.Next(0, 100) < 5;
-        int damage = isCritical ? entity.Damage * 2 : entity.Damage;
+        player.TakeDamage(damage);
         
-        entity.TakeDamage(damage);
-        
-        if (isCritical)
-            Console.WriteLine("Critical hit!");
+        return new AttackResult
+        {
+            Damage = damage,
+            IsCritical = false,
+            TargetDead = player.IsDead
+        };
     }
 }

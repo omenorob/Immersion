@@ -7,36 +7,31 @@ public class Player : Entity
 
     public Player()
     {
-        Name = "You";
-        Health = 20;
-        Damage = 5;
-        Protect = 0;
-        Coins = 0;
+        Name = "Player";
+        Health = GameConstants.PlayerStartHealth;
+        Damage = GameConstants.PlayerStartDamage;
+        Protect = GameConstants.PlayerStartProtect;
+        Coins = GameConstants.PlayerStartCoins;
         Upgrade = new PlayerUpgrade();
     }
 
-    public void Heal(int amount)
+    public int Heal(int amount)
     {
         Health += amount;
-        Console.WriteLine($"You healed for {amount} HP! Current health: {Health}");
-    }
-    
-    public override void OnDeath(Ui ui)
-    {
-        ui.ShowPlayerDeathUi();
+        return amount;
     }
 
     public void PlayerReset()
     {
-        Health = 20 + Upgrade.MaxHealthBoost;
-        Damage = 5 + Upgrade.DamageBoost;
-        Protect = Upgrade.ArmorBoost;
+        Health = GameConstants.PlayerStartHealth + Upgrade.MaxHealthBoost;
+        Damage = GameConstants.PlayerStartDamage + Upgrade.DamageBoost;
+        Protect = GameConstants.PlayerStartProtect + Upgrade.ProtectBoost;
     }
 
-    public void AddCoins(int amount)
+    public int AddCoins(int amount)
     {
         Coins += amount;
-        Console.WriteLine($"\nYou got {amount} coins! Total: {Coins}");
+        return Coins;
     }
     
     public bool SpendCoins(int amount)
